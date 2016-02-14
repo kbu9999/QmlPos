@@ -1,0 +1,5 @@
+module ui.Basics
+
+DefaultTableView    1.0 DefaultTableView.qml
+ProductoEdit        1.0 ProductoEdit.qml
+SimpleButton        1.0 SimpleButton.qml

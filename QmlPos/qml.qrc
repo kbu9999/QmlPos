@@ -1,0 +1,27 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>img/add.png</file>
+        <file>img/close.png</file>
+        <file>img/delete.png</file>
+        <file>img/personal.png</file>
+        <file>img/rename.png</file>
+        <file>img/search.png</file>
+        <file>img/settings.png</file>
+        <file>img/menu.png</file>
+        <file>Basic/OpButton.qml</file>
+        <file>Basic/FieldEdit.qml</file>
+        <file>Clientes/Instalacion.qml</file>
+        <file>Clientes/Items.qml</file>
+        <file>Clientes/Main.qml</file>
+        <file>Clientes/Pagar.qml</file>
+        <file>Clientes/Pagos.qml</file>
+        <file>main.cpp</file>
+        <file>Equipos/Items.qml</file>
+        <file>Equipos/Main.qml</file>
+        <file>Servicios/Items.qml</file>
+        <file>Servicios/Main.qml</file>
+        <file>Clientes.qml</file>
+        <file>ClientItem.qml</file>
+    </qresource>
+</RCC>
