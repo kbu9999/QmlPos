@@ -1,4 +1,5 @@
 import QtQuick 2.2
+import QtQuick.Layouts 1.1
 
 import MyQuick 1.0
 import MyQuick.Columnas 1.0
@@ -13,6 +14,13 @@ import libPos.models 0.1
 Item {
     width: 500
     height: 600
+
+    Component {
+        id: nCompra
+        OrmCompra {
+            fecha: new Date()
+        }
+    }
 
     QtObject {
         id: pr
@@ -78,20 +86,14 @@ Item {
                 z: 10
             }
 
-            Rectangle {
-                color: "blue"
-                anchors.fill: tbView
-                opacity: tbView.focus? 0.5 : 0
-            }
-
             TableView {
                 id: tbView
                 anchors.top: search.bottom
                 anchors.left: parent.left
                 anchors.right: parent.right
-                anchors.bottom: parent.bottom
+                anchors.bottom: feet.bottom
 
-                anchors.topMargin: 15
+                anchors.topMargin: 10
 
                 model: pr.cmp.compraitems
                 KeyNavigation.priority: KeyNavigation.BeforeItem
@@ -130,9 +132,31 @@ Item {
                     }
                 }
             }
+
+            RowLayout {
+                id: feet
+                height: 30
+                anchors.left: parent.left; anchors.right: parent.right
+                anchors.bottom: parent.bottom
+                anchors.leftMargin: 10; anchors.rightMargin: 10
+
+                Button {
+                    text: "Terminar"
+                    onClicked: {
+                        var b = pr.cmp.save();
+                        if (!b) return;
+
+                        pr.cmp = nCompra.createObject(pr)
+                    }
+                }
+                Item { Layout.fillWidth: true }
+                S.TextStyled {
+                    text: "Total: $"+pr.cmp.suma.toFixed(2)
+                    font.bold: true
+                }
+            }
         }
     }
-
 
 }
 
