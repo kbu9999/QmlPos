@@ -71,4 +71,56 @@ DefaultTableView {
     Component.onCompleted: {
         model.load()
     }
+
+    onDoubleClicked: {
+        var o = main.at(row)
+        if (!o) return;
+
+        txtid.text = o.idProducto
+        edit.producto = o;
+        panel.visible = true
+    }
+
+    Item {
+        id: panel
+        visible: false
+        anchors.fill: parent
+
+        Rectangle {
+            color: "grey"
+            opacity: 0.5
+            anchors.fill: parent
+        }
+
+        Rectangle {
+            id: rect1
+            color: "#ffffff"
+            radius: 30
+            width: 700
+            height: 250
+            anchors.centerIn: parent
+            anchors.margins: 15
+
+            Text {
+                y: 10
+                id: txtid
+                text: edit.producto? "ID: "+edit.producto.idProducto : "ID: NULL"
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 15
+                height: 25
+                font.bold: true
+                font.pointSize: 12
+            }
+
+            ProductoEdit {
+                id: edit
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.top: txtid.bottom
+                height: 160
+                anchors.margins: 10
+            }
+        }
+    }
 }

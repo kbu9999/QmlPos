@@ -14,9 +14,10 @@ Item {
     height: 200
     
     property alias model: filter.sourceModel
-    //property var model
     property alias filterColumn: filter.filterKeyColumn
     default property alias data: tbView.data
+
+    signal doubleClicked(int row)
 
     function at(row) {
         var i = filter.sourceIndex(row)
@@ -61,7 +62,7 @@ Item {
                     anchors.verticalCenter: parent.verticalCenter
                     source:  "img:/quit.png"
                     color: "#393939"
-                    hoveredColor: "#89cdab"
+                    hoveredColor: "red"
                     hoverEnabled: true
                     onClicked: {
                         tbView.selection.forEach( function(row) {
@@ -80,7 +81,6 @@ Item {
                     hoverEnabled: true
                     onClicked:  model.submitAll()
                 }
-
             }
 
             Search {
@@ -122,6 +122,7 @@ Item {
                 id: stl
             }        
             
+            onDoubleClicked: main.doubleClicked(row)
         }
     }
 }

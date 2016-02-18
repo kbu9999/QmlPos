@@ -8,7 +8,7 @@ import MyQuick.FieldPanel 1.0
 
 Item {
     id: imain
-    property alias producto: panel.ormObject
+    property OrmProductos producto
 
     onFocusChanged: if (focus) panel.forceActiveFocus()
     onProductoChanged: {
@@ -23,6 +23,7 @@ Item {
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: fotopart.left
+        ormObject: imain.producto
 
         columns: 2
         //spacing: 15
