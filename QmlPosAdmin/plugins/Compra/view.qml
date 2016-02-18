@@ -29,9 +29,11 @@ Item {
             //proveedor:
         }
 
-        property OrmProveedorModel provs: OrmProductosModel { }
+        property OrmProveedorModel provs: OrmProveedorModel { }
 
-        Component.onCompleted: provs.load()
+        Component.onCompleted: {
+            provs.load()
+        }
     }
 
     Rectangle {

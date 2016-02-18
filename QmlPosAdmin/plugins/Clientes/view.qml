@@ -26,7 +26,7 @@ DefaultTableView {
     TableViewColumn {
         title: "Nombre"
         role: "nombre"
-        width: 100
+        width: 140
     }
 
     Component.onCompleted: {
@@ -37,7 +37,7 @@ DefaultTableView {
         var o = main.at(row)
         if (!o) return;
 
-        //edit.producto = o;
+        editor.ormObject = o;
         panel.visible = true
     }
 
