@@ -113,13 +113,25 @@ DefaultTableView {
                 font.pointSize: 12
             }
 
+            Rectangle {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 15
+                anchors.rightMargin: 15
+                anchors.top: txtid.bottom
+                anchors.topMargin: 5
+                height: 1;
+                color: "#2b2b2b"
+            }
+
             ProductoEdit {
                 id: edit
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.top: txtid.bottom
+                anchors.topMargin: 15
                 height: 160
-                anchors.margins: 10
+                anchors.margins: 20
             }
         }
     }
