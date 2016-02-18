@@ -25,6 +25,11 @@ DefaultTableView {
         title: "Nombre"
         role: "nombre"
         width: 100
+
+        onTextChanged: {
+            var c = model.at(row)
+            c[role] = text
+        }
     }
 
     Component.onCompleted: {

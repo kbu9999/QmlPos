@@ -46,9 +46,8 @@ Dialog {
     ImageProcess {
         camera: camera
         onImageChanged: {
-            console.log("capture")
             captureDlg.captured(image);
         }
-    }
+    }//*/
 }
 

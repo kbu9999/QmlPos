@@ -14,6 +14,7 @@ Item {
     height: 200
     
     property alias model: filter.sourceModel
+    //property var model
     property alias filterColumn: filter.filterKeyColumn
     default property alias data: tbView.data
 
@@ -24,6 +25,7 @@ Item {
 
     FilterModel {
         id: filter
+        sourceModel: main.model
     }
 
     Item {
@@ -38,14 +40,47 @@ Item {
             anchors.left: parent.left
             anchors.top: parent.top
 
-            Image {
-                id: image2
-                x: 5
-                sourceSize.height: 36
-                sourceSize.width: 36
-                anchors.verticalCenter: parent.verticalCenter
-                fillMode: Image.PreserveAspectFit
-                source: "img:home.png"
+            Row {
+                anchors.fill: parent
+
+                IconButton {
+                    width: 32; height: 32
+                    anchors.verticalCenter: parent.verticalCenter
+                    source:  "img:/add.png"
+                    color: "#393939"
+                    hoveredColor: "#89cdab"
+                    hoverEnabled: true
+                    onClicked: {
+                        var i = model.count() - 1
+                        model.insertRows(i, 1)
+                    }
+                }
+
+                IconButton {
+                    width: 32; height: 32
+                    anchors.verticalCenter: parent.verticalCenter
+                    source:  "img:/quit.png"
+                    color: "#393939"
+                    hoveredColor: "#89cdab"
+                    hoverEnabled: true
+                    onClicked: {
+                        tbView.selection.forEach( function(row) {
+                             var i = filter.sourceIndex(row)
+                             model.removeRows(i, 1)
+                        });
+                    }
+                }
+
+                IconButton {
+                    width: 32; height: 32
+                    anchors.verticalCenter: parent.verticalCenter
+                    source:  "img:/save.png"
+                    color: "#393939"
+                    hoveredColor: "#89cdab"
+                    hoverEnabled: true
+                    onClicked:  model.submitAll()
+                }
+
             }
 
             Search {
@@ -85,32 +120,7 @@ Item {
 
             style: S.TableViewStyle {
                 id: stl
-            }
-
-            ButtomColumn {
-                source: "img:/add.png"
-                onClicked: {
-                    var i = filter.sourceIndex(row)
-                    model.insertRows(i, 1)
-                }
-            }
-
-            ButtomColumn {
-                source: "img:/quit.png"
-                onClicked: {
-                    var i = filter.sourceIndex(row)
-                    model.removeRows(i, 1)
-                }
-            }
-
-            ButtomColumn {
-                source: "img:/save.png"
-                onClicked: {
-                    var s = main.at(row)
-                    s.save()
-                }
-            }
-            
+            }        
             
         }
     }

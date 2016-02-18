@@ -13,6 +13,8 @@ public:
 
     QPixmap pixmap() const;
 
+    Q_INVOKABLE void clear();
+
 signals:
     void pixmapChanged(QPixmap value);
 

@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<QOrmImage>("libPos", 0,1,"OrmImage");
     qmlRegisterType<ImageProcess>("libPos", 0,1,"ImageProcess");
-    qmlRegisterType<QOrmRelation1N<QOrmProductos, QOrmCategoria> >("libPos.models", 0, 1, "OrmProductosXCategRelation");
+    //qmlRegisterType<QOrmRelation1N<QOrmProductos, QOrmCategoria> >("libPos.models", 0, 1, "OrmProductosXCategRelation");
     qmlRegisterType<FilterModel>("libPos.models", 0, 0, "FilterModel");
 
     QQmlApplicationEngine engine;

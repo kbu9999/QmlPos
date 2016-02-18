@@ -7,9 +7,14 @@ import libPos.models 0.1
 import MyQuick.FieldPanel 1.0
 
 Item {
+    id: imain
     property alias producto: panel.ormObject
 
     onFocusChanged: if (focus) panel.forceActiveFocus()
+    onProductoChanged: {
+        if (!producto) foto.clear()
+        else foto.pixmap = producto.foto
+    }
 
     Panel {
         id: panel
@@ -103,7 +108,7 @@ Item {
                 OrmImage {
                     id: foto
                     anchors.fill: parent
-                    pixmap: producto? producto.foto : null
+                    //pixmap: producto.foto
                 }
             }
 
@@ -142,9 +147,10 @@ Item {
                         ignoreUnknownSignals: true
                         onCaptured: {
                             target = null
-                            producto.foto = preview
-                            console.log("captura---")
-                            console.log(preview)
+                            if (producto) {
+                                producto.foto = preview
+                                imain.productoChanged(producto)
+                            }
                        }
                     }
                 }

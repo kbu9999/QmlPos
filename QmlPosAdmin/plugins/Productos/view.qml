@@ -68,14 +68,6 @@ DefaultTableView {
         width: 80
     }
 
-    Rectangle {
-        anchors.fill: parent
-        color: "white"
-        radius: 30
-
-
-    }
-
     Component.onCompleted: {
         model.load()
     }

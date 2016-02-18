@@ -27,7 +27,7 @@ SOURCES +=  \
     QOrm/qormproductos.cpp  \
     QOrm/qormproveedor.cpp  \
     QOrm/qormunidadmedida.cpp  \
-    QOrm/qormusuarios.cpp  \
+    #QOrm/qormusuarios.cpp  \
     QOrm/qormventaitems.cpp  \
     QOrm/qormventas.cpp \ 
     qmlposimageprovide.cpp \

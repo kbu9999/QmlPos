@@ -23,7 +23,7 @@ DefaultTableView {
 
     TextFieldColumn {
         title: "Nombre"
-        role: "Proveedor"
+        role: "proveedor"
         width: 100
 
         onTextChanged: {
@@ -34,8 +34,6 @@ DefaultTableView {
 
     Component.onCompleted: {
         model.load()
-        if (model.count() === 0)
-            main.model.insertRows(0, 1)
     }
 }
 

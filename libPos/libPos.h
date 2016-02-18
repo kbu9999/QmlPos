@@ -11,7 +11,7 @@
 #endif
 
 #include <QOrm>
-#include <QOrm/QOrm>
+//#include <QOrm/QOrm>
 
 #include <QtQml/qqml.h>
 
