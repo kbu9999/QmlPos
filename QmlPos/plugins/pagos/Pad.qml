@@ -1,11 +1,17 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.2
+import Style 1.0 as S
 
 Grid {
     columns: 4
     spacing: -1
 
     clip: true
+
+    Component {
+        id: btstl
+        S.ButtonStyle { }
+    }
 
     Button { style: btstl; text: "7"; width: 40; height: 40 }
     Button { style: btstl; text: "8"; width: 40; height: 40 }

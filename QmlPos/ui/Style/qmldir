@@ -2,4 +2,4 @@ module ui.Style
 
 TableViewStyle  1.0 TableViewStyle.qml
 TextStyled      1.0 TextStyled.qml
-
+ButtonStyle     1.0 ButtonStyle.qml

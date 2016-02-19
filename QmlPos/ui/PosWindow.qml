@@ -1,10 +1,12 @@
-import QtQuick 2.2
+import QtQuick 2.4
 import QtQuick.Controls 1.1
 import QtQuick.Controls.Styles 1.1
-
+import QtQuick.Layouts 1.2
+import Qt.labs.folderlistmodel 2.0
 
 import MyQuick 1.0
 import libPos 0.1
+import Style 1.0 as S
 
 Item {
     id: main
@@ -47,22 +49,50 @@ Item {
 
         color: "#e2e2e2"
 
-        DetalleView {
-            id: detalle
-            height: 320
-            anchors.right: parent.right
-            anchors.left: parent.left
-            anchors.top: parent.top
-        }
+        ColumnLayout {
+            anchors.fill: parent
+            spacing: 0
 
-        Loader {
-            id: pago
-            anchors.bottom: parent.bottom
-            anchors.right: parent.right
-            anchors.left: parent.left
-            anchors.top: detalle.bottom
+            DetalleView {
+                id: detalle
+                Layout.fillWidth: true
+                Layout.minimumHeight: 360
+            }
 
-            source: "../plugins/pagos/Efectivo.qml"
+            RowLayout {
+                Layout.fillWidth: true
+                Layout.minimumHeight: 35
+                spacing: 0
+
+                ExclusiveGroup {
+                    id: excl
+                }
+
+                Repeater {
+                    model: FolderListModel {
+                        id: pluginsModel
+                        folder: "../plugins/pagos"
+                    }
+                    delegate: Button {
+                        text: fileName.replace(".qml", "")
+                        checkable: true
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+
+                        style: S.ButtonStyle { }
+
+                        onClicked: pago.setSource(fileURL)
+
+                        exclusiveGroup: excl
+                    }
+                }
+            }
+
+            Loader {
+                id: pago
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+            }
         }
     }
 

@@ -53,4 +53,7 @@ DISTFILES += \
     ui/DetalleView.qml \
     ui/Pad.qml \
     ui/MenuView.qml \
-    plugins/pagos/Efectivo.qml
+    plugins/pagos/Efectivo.qml \
+    ui/Style/ButtonStyle.qml \
+    ui/Style/qmldir \
+    plugins/pagos/Pad.qml

@@ -1,5 +1,4 @@
 import QtQuick 2.0
-
 import QtQuick.Controls 1.1
 import QtQuick.Controls.Styles 1.1
 
@@ -7,35 +6,11 @@ import QtQuick.Controls.Styles 1.1
 import MyQuick 1.0
 import libPos 0.1
 import libPos.models 0.1
-import Style 1.0
+import Style 1.0 as S
 
 Item {
     implicitHeight: 300
     implicitWidth: 400
-
-    Component {
-        id: btstl
-        ButtonStyle {
-            background: Rectangle {
-                color: control.checked || control.hovered ? "#6ec89b" : "#e2e2e2"
-                border.color: "#848484"
-                border.width: 1
-                radius: 1
-                implicitWidth: 50
-                implicitHeight: 30
-            }
-
-            label: Text {
-                color: control.checked || control.hovered? "white" : "#393939"
-                text: control.text
-                font.pointSize: 9
-                font.bold: control.checked
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-                //anchors.fill: control
-            }
-        }
-    }
 
     Connections {
         target: mainVenta
@@ -54,7 +29,7 @@ Item {
         checkable: true
         checked: cbCli.focus
 
-        style: btstl
+        style: S.ButtonStyle { }
     }
 
     Button {
@@ -68,7 +43,7 @@ Item {
         checkable: true
         checked: tPg.focus
 
-        style: btstl
+        style: S.ButtonStyle { }
     }
 
     ComboBox {
@@ -81,7 +56,9 @@ Item {
         editable: true
         textRole: "nombre"
 
-        model: OrmClientesModel { id: clModel }
+        model: OrmClientesModel {
+            id: clModel
+        }
 
         onCurrentIndexChanged:  tPg.focus = true
         onFocusChanged: if (focus) selectAll()
@@ -108,15 +85,9 @@ Item {
         style: SpinBoxStyle { textColor: "black" }
     }
 
-
-    Pad {
-        id: pad
-        x: 145
-        y: 80
-        width: 160
-        height: 160
+    Component.onCompleted: {
+        clModel.load()
+        console.log(clModel.count())
     }
-
-    Component.onCompleted: clModel.load()
 }
 
