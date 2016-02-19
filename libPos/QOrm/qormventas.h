@@ -57,7 +57,7 @@ signals:
     void clientesChanged(QOrmClientes* value); 
     void pagoChanged(); 
     void ventaitemsChanged();
-    void sumaChanged(double value);
+    void sumaChanged();
 
 private: 
     QQmlListProperty<QOrmPago> pago(); 
@@ -68,8 +68,7 @@ private:
     QOrmUsuario* m_usuario;
     QOrmClientes* m_clientes; 
     QList<QOrmPago*> m_pago; 
-    QList<QOrmVentaItems*> m_ventaitems; 
-    double m_suma;
+    QList<QOrmVentaItems*> m_ventaitems;
 };
 
 Q_DECLARE_METATYPE(QOrmVentas*)

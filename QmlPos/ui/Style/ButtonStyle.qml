@@ -1,3 +1,4 @@
+//pragma singleton
 import QtQuick 2.2
 import QtQuick.Controls.Styles 1.3
 

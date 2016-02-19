@@ -39,7 +39,7 @@ QOrmVentas::QOrmVentas() :
     m_usuario = 0;
     m_clientes = 0;
 
-    m_suma = 0;
+    connect(this, &QOrmVentas::ventaitemsChanged, this, &QOrmVentas::sumaChanged);
 }
 
 QOrmVentas::~QOrmVentas()
@@ -134,18 +134,17 @@ QList<QOrmVentaItems *> QOrmVentas::listVentaItems() const
 
 double QOrmVentas::suma() const
 {
-    return m_suma;
+    double suma = 0;
+    for(QOrmVentaItems *vi : m_ventaitems) {
+        suma += vi->precio() * vi->cantidad();
+    }
+    return suma;
 }
 
 void QOrmVentas::afterLoad()
 {
     loadChildren<QOrmVentaItems>();
-
-    for(QOrmVentaItems *vi : m_ventaitems) {
-        m_suma += vi->precio() * vi->cantidad();
-    }
-
-    emit sumaChanged(m_suma);
+    emit sumaChanged();
 }
 void QOrmVentas::appendVentaItems(QOrmVentaItems *child)
 {
@@ -153,19 +152,15 @@ void QOrmVentas::appendVentaItems(QOrmVentaItems *child)
 
     appendChildren(child);
     emit ventaitemsChanged();
-
-    m_suma += child->precio() * child->cantidad();
-    emit sumaChanged(m_suma);
 }
 void QOrmVentas::removeVentaItems(QOrmVentaItems *child)
 {
     m_ventaitems.removeOne(child);
 
+    disconnect(child);
     removeChildren(child);
-    emit ventaitemsChanged();
 
-    m_suma -= child->precio() * child->cantidad();
-    emit sumaChanged(m_suma);
+    emit ventaitemsChanged();
 }
 
 void QOrmVentas::addVentaItems(QOrmProductos *prod, double cant)
@@ -185,13 +180,11 @@ void QOrmVentas::addVentaItems(QOrmProductos *prod, double cant)
         nvi->setPrecio(prod->precio());
 
         m_ventaitems.append(nvi);
+        connect(nvi, &QOrmVentaItems::cantidadChanged, this, &QOrmVentas::sumaChanged);
     }
 
     nvi->setCantidad(nvi->cantidad() + cant);
     emit ventaitemsChanged();
-
-    m_suma += nvi->precio() * cant;
-    emit sumaChanged(m_suma);
 }
 
 QQmlListProperty<QOrmVentaItems> QOrmVentas::ventaitems()

@@ -6,20 +6,18 @@ Rectangle {
     width: 120; height: 120
     color: "white"
 
-    property alias source: img.source
-    property string uni: "U"
-    property real prec: 0
-    property string name: "Producto"
-
     border.color: "#d3d3d3"
     border.width: 1
+    anchors.margins: 1
 
     clip: true
 
     Image {
         id: img
-        fillMode: Image.PreserveAspectFit
+        //fillMode: Image.PreserveAspectFit
         anchors.fill: parent
+        anchors.margins: 1
+        source: "image://productos/"+idProducto
     }
 
     Rectangle {
@@ -35,16 +33,22 @@ Rectangle {
             color: "white"
             font.bold: true
 
-            text: "$ "+ deleg.prec.toFixed(2) + " " + deleg.uni
+            text: "$ "+ precio.toFixed(2) + " " + unidades
             verticalAlignment: Text.AlignVCenter
         }
     }
 
-    Text {
-        text: name
-        anchors.left: parent.left
-        anchors.leftMargin: 5
-        anchors.bottomMargin: 5
-        anchors.bottom: parent.bottom
+    Rectangle {
+        anchors.left: parent.left; anchors.bottom: parent.bottom
+        anchors.leftMargin: 2; anchors.bottomMargin: 2
+        width: ntxt.width + 10 ; height: ntxt.height
+        color: "white"
+
+        Text {
+            x: 5
+            id: ntxt
+            text: nombre
+            font.bold: true
+        }
     }
 }

@@ -184,10 +184,6 @@ Rectangle {
         cellHeight: 140
         clip: true
         delegate: ProductoDelegate {
-            name: nombre
-            uni: unidades
-            prec: precio
-            //source: "image://productos/"+idProducto
             //focus: prodView.currentIndex == index
 
             MouseArea {
